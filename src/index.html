@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <link rel="stylesheet" type="text/css" href="assets/css/reset.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/styles.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/prism.css">
+  <link rel="stylesheet" type="text/css" href="assets/css/material-icons.css">
+</head>
+<body>
+
+  <header>
+    <form>
+      <label>
+        <i class="material-icons">search</i>
+        <input type="text" name="search" placeholder="Insira a placa" style="width: 80%;">
+      </label>
+    </form>
+
+    <button class="cursor-pointer">
+      <i class="material-icons">code</i>
+    </button>
+  </header>
+
+  <main id="home">
+    <div class="container">
+      <div id="storage"></div>
+    </div>
+  </main>
+
+  <main id="code" style="display: none;">
+
+<pre><code class="language-javascript">class Storage {
+  constructor() {
+
+  }
+}</code></pre>
+
+<pre><code class="language-javascript">class Hash {
+  constructor() {
+
+  }
+}</code></pre>
+
+<pre><code class="language-javascript">class Car {
+  constructor() {
+
+  }
+}</code></pre>
+
+  </main>
+
+  <script type="text/javascript" src="js/lib/prism.js"></script>
+  <script type="text/javascript" src="js/main.js"></script>
+</body>
+</html>
