@@ -5,19 +5,16 @@ const electron = require("electron")
   , url = require("url");
 
 class Main {
-  constructor(opt) {
+  constructor() {
     this._window = null;
   }
 
   create() {
     let app = electron.app;
-
     app.on("ready", this._setWindow);
-
     app.on("window-all-closed", () => {
       if(process.platform !== "darwin") app.quit();
     })
-
     app.on("activate", function() {
       if(main === null) this._setWindow();
     })
@@ -29,20 +26,18 @@ class Main {
       width: 800,
       height: 600,
       show: false,
+      frame: true,
       resizable: false,
-      icon: path.join(__dirname, "./src/assets/img/icon.png")
+      icon: path.join(__dirname, "./www/assets/img/icon.png")
     })
-
     this._window.webContents.once("dom-ready", () => {
       this._window.show();
     })
-
     this._window.loadURL(url.format({
-      pathname: path.join(__dirname, "./src/index.html"),
+      pathname: path.join(__dirname, "./www/index.html"),
       protocol: "file:",
       slashes: true
     }))
-
     this._window.on("closed", () => {
       this._window = null;
     })
