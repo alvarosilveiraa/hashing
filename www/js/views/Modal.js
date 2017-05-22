@@ -32,7 +32,7 @@ class ModalView extends View {
         </div>
       `;
     }else if(model.message) {
-      content = `<p>${model.message}</p>`;
+      content = `<br><p>${model.message}</p>`;
     }else if(model.vacancy) {
       let collection = '';
       for(let i = 0; i < model.vacancy.length; i++) {

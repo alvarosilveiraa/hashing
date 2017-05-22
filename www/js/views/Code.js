@@ -1,10 +1,12 @@
 const fs = require("fs")
   , path = require("path")
   , cs = path.join(__dirname, "../../cs")
+  , db = path.join(__dirname, "../../db")
   , program = fs.readFileSync(path.join(cs, "Program.cs"), 'utf8')
   , hash = fs.readFileSync(path.join(cs, "Hash.cs"), 'utf8')
   , car = fs.readFileSync(path.join(cs, "Car.cs"), 'utf8')
-  , storage = fs.readFileSync(path.join(cs, "Storage.cs"), 'utf8');
+  , storage = fs.readFileSync(path.join(cs, "Storage.cs"), 'utf8')
+  , database = fs.readFileSync(path.join(db, "storage.txt"), 'utf8');
 
 class CodeView extends View {
   constructor(element) {
@@ -30,6 +32,9 @@ class CodeView extends View {
           <li class="tab col s3">
             <a href="#storage">Storage.cs</a>
           </li>
+          <li class="tab col s3">
+            <a href="#database">storage.txt</a>
+          </li>
         </ul>
       </div>
       <main style="height: calc(100vh - 115px) !important;">
@@ -47,6 +52,10 @@ class CodeView extends View {
 
           <div id="storage" class="col s12">
             <pre><code class="language-csharp">${storage}</code></pre>
+          </div>
+
+          <div id="database" class="col s12">
+            <pre><code class="language-">${database}</code></pre>
           </div>
       </main>
     `;

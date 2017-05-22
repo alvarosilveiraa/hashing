@@ -28,10 +28,10 @@ class HomeController extends Controller {
       input.value = this._fixPlate(input.value);
       this._storageModel.getOne(input.value)
         .then(data => {
-          main.modal.render($(".modal"), {
-            title: "Pesquisa da placa",
-            car: data
-          })
+          let model = {};
+          model.title = "Pesquisa da placa";
+          data? model.car = data: model.message = `(${input.value}) Placa nao encontrada`;
+          main.modal.render($(".modal"), model);
           input.value = '';
         })
         .catch(err => {
