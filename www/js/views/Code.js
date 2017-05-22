@@ -1,3 +1,11 @@
+const fs = require("fs")
+  , path = require("path")
+  , cs = path.join(__dirname, "../../cs")
+  , program = fs.readFileSync(path.join(cs, "Program.cs"), 'utf8')
+  , hash = fs.readFileSync(path.join(cs, "Hash.cs"), 'utf8')
+  , car = fs.readFileSync(path.join(cs, "Car.cs"), 'utf8')
+  , storage = fs.readFileSync(path.join(cs, "Storage.cs"), 'utf8');
+
 class CodeView extends View {
   constructor(element) {
     super(element);
@@ -5,7 +13,7 @@ class CodeView extends View {
 
   template(model) {
     return `
-      <div class="modal"></div>
+      <div class="modal modal-fixed-footer"></div>
       <header class="navbar-fixed">
         ${model.navbar.template({name: "home"})}
       </header>
@@ -26,39 +34,19 @@ class CodeView extends View {
       </div>
       <main style="height: calc(100vh - 115px) !important;">
           <div id="program" class="col s12">
-<pre><code class="language-csharp">class Program {
-  private string teste;
-  public Hash() {
-    this.teste = "Hash";
-  }
-}</code></pre>
+            <pre><code class="language-csharp">${program}</code></pre>
           </div>
 
           <div id="hash" class="col s12">
-<pre><code class="language-csharp">class Hash {
-  private string teste;
-  public Hash() {
-    this.teste = "Hash";
-  }
-}</code></pre>
+            <pre><code class="language-csharp">${hash}</code></pre>
           </div>
 
           <div id="car" class="col s12">
-<pre><code class="language-csharp">class Car {
-  private string teste;
-  public Car() {
-    this.teste = "A";
-  }
-}</code></pre>
+            <pre><code class="language-csharp">${car}</code></pre>
           </div>
 
           <div id="storage" class="col s12">
-<pre><code class="language-csharp">class Storage {
-  private string teste;
-  public Storage() {
-    this.teste = "B";
-  }
-}</code></pre>
+            <pre><code class="language-csharp">${storage}</code></pre>
           </div>
       </main>
     `;

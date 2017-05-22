@@ -1,22 +1,27 @@
-body {
-  overflow: hidden;
-}
-
-main::-webkit-scrollbar {
+*::-webkit-scrollbar {
   width: 8px;
 }
 
-main::-webkit-scrollbar-track {
+*::-webkit-scrollbar-track {
   background-color: #DDD;
 }
 
-main::-webkit-scrollbar-thumb {
+*::-webkit-scrollbar-thumb {
   border-radius: 20px;
   background-color: #546e7a;
 }
 
+body {
+  overflow: hidden;
+}
+
 main {
   overflow: auto !important;
+}
+
+a[disabled] {
+  pointer-events: none;
+  cursor: default;
 }
 
 .tabs .tab a{

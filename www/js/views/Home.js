@@ -5,7 +5,7 @@ class HomeView extends View {
 
   template(model) {
     return `
-      <div class="modal"></div>
+      <div class="modal modal-fixed-footer"></div>
       <header class="navbar-fixed">
         ${model.navbar.template({name: "code"})}
       </header>
@@ -18,8 +18,9 @@ class HomeView extends View {
   _setStorage(storage) {
     let items = '';
     for(let i = 0; i < 100; i++) {
-      let cars = '<i class="material-icons">do_not_disturb</i>';
+      let cars = '<i class="material-icons">do_not_disturb</i>', disabled = {text: "disabled", color: "grey-text"};
       if(storage && storage[i]) {
+        disabled = {text: '', color: "blue-grey-text"};
         if(storage[i].length > 5) {
           cars = `
             <i class="material-icons">directions_car</i>
@@ -41,8 +42,8 @@ class HomeView extends View {
         }
       }
       items += `
-        <div onclick="main.home.vacancy(${i})" class="col s4">
-          <a href="#!" class="blue-grey-text collection-item">
+        <div class="col s4">
+          <a href="#" onclick="main.home.vacancy(${i})" class="${disabled.color} collection-item" ${disabled.text}>
             ${cars}
             <span class="badge">${i}</span>
           </a>
