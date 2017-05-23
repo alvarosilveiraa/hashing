@@ -27,7 +27,7 @@ class Main {
       height: 600,
       show: false,
       frame: true,
-      resizable: false,
+      resizable: true,
       icon: path.join(__dirname, "./www/assets/img/icon.png")
     })
     this._window.webContents.once("dom-ready", () => {

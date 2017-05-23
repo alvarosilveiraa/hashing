@@ -9,7 +9,7 @@ class HomeView extends View {
       <header class="navbar-fixed">
         ${model.navbar.template({name: "code"})}
       </header>
-      <main class="row collection" style="height: calc(100vh - 75px) !important;">
+      <main class="row collection" style="max-width: 800px; height: calc(100vh - 75px) !important;">
         ${this._setStorage(model.storage)}
       </main>
     `;
