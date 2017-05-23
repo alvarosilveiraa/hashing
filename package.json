@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "electron .",
-    "pack:win32": "electron-packager . Launcher --out=dist --platform=win32 --arch=ia32 --icon=src/assets/img/favicon.ico",
-    "pack:win64": "electron-packager . Launcher --out=dist --platform=win32 --arch=x64 --icon=src/assets/img/favicon.ico"
+    "pack:win32": "electron-packager . Hashing --out=dist --platform=win32 --arch=ia32 --icon=www/assets/img/favicon.ico",
+    "pack:win64": "electron-packager . Hashing --out=dist --platform=win32 --arch=x64 --icon=www/assets/img/favicon.ico"
   },
   "author": "Alvaro Silveira",
   "license": "ISC",

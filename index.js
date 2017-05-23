@@ -28,7 +28,7 @@ class Main {
       show: false,
       frame: true,
       resizable: true,
-      icon: path.join(__dirname, "./www/assets/img/icon.png")
+      icon: path.join(__dirname, "./www/assets/img/favicon.ico")
     })
     this._window.webContents.once("dom-ready", () => {
       this._window.show();
