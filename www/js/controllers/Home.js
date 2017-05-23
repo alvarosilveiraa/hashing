@@ -8,17 +8,17 @@ class HomeController extends Controller {
   }
 
   render() {
-    this._storageModel.readDatabase((err, storage) => {
-      if(err)
-        alert(err.toString());
-      else
-        this._storage = storage;
-
-      this._homeView.update({
-        navbar: this._navbarView,
-        storage: this._storage
+    this._storageModel.getAll()
+      .then(data => {
+        this._storage = data;
+        this._homeView.update({
+          navbar: this._navbarView,
+          storage: this._storage
+        })
       })
-    })
+      .catch(err => {
+        alert(err.toString());
+      })
   }
 
   search(e) {
@@ -30,7 +30,7 @@ class HomeController extends Controller {
         .then(data => {
           let model = {};
           model.title = "Pesquisa da placa";
-          data? model.car = data: model.message = `(${input.value}) Placa nao encontrada`;
+          data? model.car = data: model.message = `(${input.value}) Placa não encontrada`;
           main.modal.render($(".modal"), model);
           input.value = '';
         })
@@ -38,12 +38,12 @@ class HomeController extends Controller {
           alert(err.toString());
         })
     }else {
-      alert("Placa invalida!");
+      alert("Placa inválida!");
       input.value = '';
     }
   }
 
-  add() {
+  insert() {
     main.modal.render($(".modal"), {
       form: true,
       btn: {
@@ -63,8 +63,8 @@ class HomeController extends Controller {
           form.plate = this._fixPlate(form.plate);
           this._storageModel.insert(form)
             .then(data => {
-              console.log(form);
-              console.log(data);
+              alert(data);
+              this.render();
             })
             .catch(err => {
               alert(err.toString());
@@ -74,7 +74,6 @@ class HomeController extends Controller {
         }
       }
     })
-    $("#plate").focus();
   }
 
   vacancy(index) {

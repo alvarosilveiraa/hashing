@@ -9,7 +9,7 @@ class NavbarView extends View {
         <div class="nav-wrapper">
           <ul class="right">
             <li>
-              <a onclick="main.home.add()">
+              <a onclick="main.home.insert()">
                 <i class="material-icons">add</i>
               </a>
             </li>
