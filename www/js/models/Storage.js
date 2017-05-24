@@ -1,4 +1,4 @@
-const exec = require("child_process").execFile
+const exec = require("child_process")
   , fs = require("fs")
   , path = require("path");
 
@@ -13,7 +13,7 @@ class StorageModel {
   insert(car) {
     return new Promise((resolve, reject) => {
       let parameters = ["--insert", this._database, car.plate, car.model, car.year];
-      exec(this._exeFile, parameters, (err, data) => {
+      exec.execFile(this._exeFile, parameters, (err, data) => {
         if(err) return reject(err);
         resolve(parseInt(data));
       })
@@ -23,7 +23,7 @@ class StorageModel {
   getOne(plate) {
     return new Promise((resolve, reject) => {
       let parameters = ["--one", this._database, plate];
-      exec(this._exeFile, parameters, (err, data) => {
+      exec.execFile(this._exeFile, parameters, (err, data) => {
         if(err) return reject(err);
         let output = null;
         if(data) {
@@ -44,7 +44,7 @@ class StorageModel {
   getAll() {
     return new Promise((resolve, reject) => {
       let parameters = ["--all", this._database];
-      exec(this._exeFile, parameters, (err, data) => {
+      exec.execFile(this._exeFile, parameters, (err, data) => {
         if(err) return reject(err);
         let output = data.split('\n')
           , storage = [];
@@ -63,6 +63,12 @@ class StorageModel {
         }
         resolve(storage);
       })
+    })
+  }
+
+  openDatabase() {
+    exec.exec("start storage.txt", {
+      cwd: this._pathDatabase
     })
   }
 }

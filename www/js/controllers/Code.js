@@ -3,6 +3,7 @@ class CodeController extends Controller {
     super();
     this._navbarView = new NavbarView();
     this._codeView = new CodeView($("#view"));
+    this._storageModel = new StorageModel();
   }
 
   render() {
@@ -18,6 +19,10 @@ class CodeController extends Controller {
       element.style.display = "none";
     })
     $(`#${name}`).style.display = "block";
+  }
+
+  openStorageTxt() {
+    this._storageModel.openDatabase();
   }
 }
 

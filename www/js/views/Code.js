@@ -55,6 +55,13 @@ class CodeView extends View {
         </div>
 
         <div id="database" class="col s12">
+
+          <div style="position: absolute; right: 5%; bottom: 5%;">
+            <a onclick="main.code.openStorageTxt()" class="btn-floating btn-large waves-effect waves-light blue-grey">
+              <i class="material-icons">open_in_new</i>
+            </a>
+          </div>
+
           <pre><code class="language-">${database}</code></pre>
         </div>
       </main>
