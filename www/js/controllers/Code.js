@@ -12,15 +12,6 @@ class CodeController extends Controller {
     $('ul.tabs').tabs();
   }
 
-  tab(e, name) {
-    $("button.active").classList.remove("active");
-    (e.currentTarget).classList.add("active");
-    $all("pre").forEach(element => {
-      element.style.display = "none";
-    })
-    $(`#${name}`).style.display = "block";
-  }
-
   openStorageTxt() {
     this._storageModel.openDatabase();
   }

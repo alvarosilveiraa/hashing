@@ -58,34 +58,7 @@ class HomeController extends Controller {
       btn: {
         name: "Inserir"
       }
-    }, () => {
-      let form = {
-        plate: $("#plate").val(),
-        model: $("#model").val(),
-        year: $("#year").val()
-      }
-
-      if(!form.plate || !form.model || !form.year) {
-        alert("Preencha todos os campos!");
-      }else {
-        if(this._fixPlate(form.plate)) {
-          form.plate = this._fixPlate(form.plate);
-          this._storageModel.insert(form)
-            .then(data => {
-              if(!this._storage[data])
-                this._storage[data] = [];
-              this._storage[data].push(form);
-              alert(`Veiculo inserido na vaga: ${data}`);
-              this.render();
-            })
-            .catch(err => {
-              alert(err.toString());
-            })
-        }else {
-          alert("Placa invalida!");
-        }
-      }
-    })
+    }, this._onInsert.bind(this))
   }
 
   vacancy(index) {
@@ -93,6 +66,60 @@ class HomeController extends Controller {
       title: `${this._storage[index].length} veiculo${this._storage[index].length > 1? 's': ''} (vaga ${index})`,
       vacancy: this._storage[index]
     })
+  }
+
+  _onInsert() {
+    let form = {}
+    form.plate = $("#plate").val();
+    form.model = $("#model").val();
+    form.year = $("#year").val();
+
+    try {
+      this._validVehicle(form);
+      this._storageModel.insert(form)
+        .then(data => {
+          if(!this._storage[data])
+            this._storage[data] = [];
+          this._storage[data].push(form);
+          alert(`Veiculo inserido na vaga: ${data}`);
+          this.render();
+        })
+        .catch(err => {
+          alert(err.toString());
+        })
+    }catch(e) {
+      alert(e);
+    }
+  }
+
+  _validVehicle(form) {
+    let message = '';
+
+    if(!form.plate)
+      message += "\n(Placa) Campo obrigatorio";
+    if(!form.model)
+      message += "\n(Modelo) Campo obrigatorio";
+    if(!form.year)
+      message += "\n(Ano) Campo obrigatorio";
+
+    if(message != '')
+      throw new Error(message);
+
+    form.plate = this._fixPlate(form.plate);
+    let today = new Date();
+    if(!form.plate)
+      message += "\n(Placa) Campo invalido";
+    if(
+      !/^\d{4}$/.test(form.year) ||
+      (
+        form.year < 1900 ||
+        form.year > today.getFullYear() + 1
+      )
+    )
+      message += "\n(Ano) Campo invalido";
+
+    if(message != '')
+      throw new Error(message);
   }
 
   _fixPlate(plate) {

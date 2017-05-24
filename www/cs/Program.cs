@@ -23,7 +23,7 @@ namespace Hashing
         }
       }catch
       {
-        Console.WriteLine("Error");
+        Console.WriteLine("Ocorreu um erro inesperado!");
       }
     }
   }
