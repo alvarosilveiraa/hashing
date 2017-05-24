@@ -9,7 +9,7 @@ class HomeView extends View {
       <header class="navbar-fixed">
         ${model.navbar.template({name: "code"})}
       </header>
-      <main class="row collection" style="max-width: 800px; height: calc(100vh - 75px) !important;">
+      <main class="row collection" style="height: calc(100vh - 75px) !important;">
         ${this._setStorage(model.storage)}
       </main>
     `;
@@ -42,7 +42,7 @@ class HomeView extends View {
         }
       }
       items += `
-        <div class="col s4">
+        <div class="col s12 m6 l4 xl2">
           <a href="#" onclick="main.home.vacancy(${i})" class="${disabled.color} collection-item" ${disabled.text}>
             ${cars}
             <span class="badge">${i}</span>

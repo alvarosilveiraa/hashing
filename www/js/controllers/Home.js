@@ -3,22 +3,31 @@ class HomeController extends Controller {
     super();
     this._storage = [];
     this._navbarView = new NavbarView();
+    this._loaderView = new LoaderView($("#view"));
     this._homeView = new HomeView($("#view"));
     this._storageModel = new StorageModel();
   }
 
   render() {
-    this._storageModel.getAll()
-      .then(data => {
-        this._storage = data;
-        this._homeView.update({
-          navbar: this._navbarView,
-          storage: this._storage
+    if(this._storage.length == 0) {
+      this._loaderView.update();
+      this._storageModel.getAll()
+        .then(data => {
+          this._storage = data;
+          this._homeView.update({
+            navbar: this._navbarView,
+            storage: this._storage
+          })
         })
+        .catch(err => {
+          alert(err.toString());
+        })
+    }else {
+      this._homeView.update({
+        navbar: this._navbarView,
+        storage: this._storage
       })
-      .catch(err => {
-        alert(err.toString());
-      })
+    }
   }
 
   search(e) {
@@ -63,7 +72,10 @@ class HomeController extends Controller {
           form.plate = this._fixPlate(form.plate);
           this._storageModel.insert(form)
             .then(data => {
-              alert(data);
+              if(!this._storage[data])
+                this._storage[data] = [];
+              this._storage[data].push(form);
+              alert(`Veiculo inserido na vaga: ${data}`);
               this.render();
             })
             .catch(err => {

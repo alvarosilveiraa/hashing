@@ -15,7 +15,7 @@ class StorageModel {
       let parameters = ["--insert", this._database, car.plate, car.model, car.year];
       exec(this._exeFile, parameters, (err, data) => {
         if(err) return reject(err);
-        resolve(data);
+        resolve(parseInt(data));
       })
     })
   }

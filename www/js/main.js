@@ -1,6 +1,7 @@
 "use strict";
 
 const View = require("./js/views/View")
+  , LoaderView = require("./js/views/Loader")
   , ModalView = require("./js/views/Modal")
   , NavbarView = require("./js/views/Navbar")
   , HomeView = require("./js/views/Home")
